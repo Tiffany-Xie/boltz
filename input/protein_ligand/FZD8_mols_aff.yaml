@@ -6,3 +6,6 @@ sequences:
   - ligand:
       id: B
       smiles: NCC(CO)CCC1=CC=CCC1
+properties:
+  - affinity:
+      binder: B

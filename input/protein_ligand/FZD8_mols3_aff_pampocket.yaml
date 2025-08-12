@@ -1,0 +1,15 @@
+version: 1
+sequences:
+  - protein:
+      id: [A]
+      sequence: ACQEITVPLCKGIGYQYTYMPNQFNHDTQDEAGLEVHQFWPLVEIQCSPDLKFFLCSMYTPICLEDYKKPLPPCRSVCERAKAGCAPLMRQYGFAWPDRMRCDRLPEQGNPDTLCMDYN
+  - ligand:
+      id: [B]
+      smiles: CCCCC(O)CCC(C)(C)O
+constraints:
+  - pocket:
+      binder: B
+      contacts: [ [ A, 39 ], [ A, 41 ], [ A, 42 ], [ A, 89 ], [ A, 97 ] ]
+properties:
+  - affinity:
+      binder: B
