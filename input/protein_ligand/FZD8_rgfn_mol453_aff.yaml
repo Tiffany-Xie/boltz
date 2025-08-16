@@ -5,11 +5,7 @@ sequences:
       sequence: ACQEITVPLCKGIGYQYTYMPNQFNHDTQDEAGLEVHQFWPLVEIQCSPDLKFFLCSMYTPICLEDYKKPLPPCRSVCERAKAGCAPLMRQYGFAWPDRMRCDRLPEQGNPDTLCMDYN
   - ligand:
       id: [B]
-      smiles: C(O)CCCCCCCCCCCCCCC
-constraints:
-  - pocket:
-      binder: B
-      contacts: [ [ A, 39 ], [ A, 41 ], [ A, 42 ], [ A, 89 ], [ A, 97 ] ]
+      smiles: O=C1CCN(c2cccc3c2CCN=C3[C@@H]2Cc3ccccc3CN2)CC1
 properties:
   - affinity:
       binder: B
