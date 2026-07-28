@@ -13,6 +13,7 @@ from torch.types import Device
 
 LinearNoBias = partial(Linear, bias=False)
 
+
 def autocast_device_type(device_type: str) -> str:
     """Return a device_type string accepted by ``torch.autocast``.
 
@@ -24,6 +25,17 @@ def autocast_device_type(device_type: str) -> str:
     from torch.amp.autocast_mode import is_autocast_available
 
     return device_type if is_autocast_available(device_type) else "cpu"
+
+
+def split_sample_ids(
+    sample_ids: torch.Tensor,
+    max_parallel_samples: int,
+) -> tuple[torch.Tensor, ...]:
+    """Split sample IDs into batches capped by the requested parallelism."""
+    if max_parallel_samples < 1:
+        msg = "max_parallel_samples must be at least 1."
+        raise ValueError(msg)
+    return sample_ids.split(max_parallel_samples)
 
 
 def exists(v):

@@ -34,6 +34,7 @@ from boltz.model.modules.utils import (
     center_random_augmentation,
     default,
     log,
+    split_sample_ids,
 )
 from boltz.model.potentials.potentials import get_potentials
 
@@ -538,8 +539,9 @@ class AtomDiffusion(Module):
                 )
 
                 sample_ids = torch.arange(multiplicity, device=atom_coords_noisy.device)
-                sample_ids_chunks = sample_ids.chunk(
-                    multiplicity % max_parallel_samples + 1
+                sample_ids_chunks = split_sample_ids(
+                    sample_ids,
+                    max_parallel_samples,
                 )
                 for sample_ids_chunk in sample_ids_chunks:
                     atom_coords_denoised_chunk, token_a_chunk = (
