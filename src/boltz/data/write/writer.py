@@ -247,15 +247,25 @@ class BoltzWriter(BasePredictionWriter):
                     np.savez_compressed(path, pde=pde.cpu().numpy())
                 
             # Save embeddings
-            if self.write_embeddings and "s" in prediction and "z" in prediction:
-                s = prediction["s"].cpu().numpy()
-                z = prediction["z"].cpu().numpy()
+            if self.write_embeddings:
+                embeddings = {
+                    "s": prediction["s"].detach().float().cpu().numpy(),
+                    "z": prediction["z"].detach().float().cpu().numpy(),
+                }
+                if "pdistogram" in prediction:
+                    embeddings["pdistogram"] = (
+                        prediction["pdistogram"].detach().float().cpu().numpy()
+                    )
+                if "token_masks" in prediction:
+                    embeddings["token_mask"] = (
+                        prediction["token_masks"].detach().cpu().numpy()
+                    )
 
                 path = (
                     struct_dir
                     / f"embeddings_{record.id}.npz"
                 )
-                np.savez_compressed(path, s=s, z=z)
+                np.savez_compressed(path, **embeddings)
 
     def on_predict_epoch_end(
         self,

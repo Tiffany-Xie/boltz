@@ -1037,7 +1037,10 @@ def cli() -> None:
 @click.option(
     "--write_embeddings",
     is_flag=True,
-    help=" to dump the s and z embeddings into a npz file. Default is False.",
+    help=(
+        "Dump trunk outputs (s, z, and pdistogram) and the token mask "
+        "to an npz file. Default is False."
+    ),
 )
 def predict(  # noqa: C901, PLR0915, PLR0912
     data: str,
